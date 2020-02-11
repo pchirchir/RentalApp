@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Rental App</string>
+    <string name="CLIENT_ID">541957323895-d7o64n5s2adoai4tu1dbbpk2a6enfdci.apps.googleusercontent.com</string>
+    <string name="CLIENT_SECRET">XD4DDcIV1XzIz0bEO1ECz-2z</string>
+    <string name="welcome_text">Welcome!!!</string>
+    <string name="logo">Logo</string>
+</resources>

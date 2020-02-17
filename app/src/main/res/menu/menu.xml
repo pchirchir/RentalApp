@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/profile"
+        android:title="Profile"
+        android:icon="@drawable/profile"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/notification"
+        android:icon="@drawable/notify"
+        android:title="share"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/share"
+        android:icon="@drawable/share"
+        android:title="share"
+        app:showAsAction="always" />
+
+
+    <item
+        android:id="@+id/settings"
+        android:title="Settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/logout"
+        android:title="LogOut"
+        app:showAsAction="never" />
+
+</menu>

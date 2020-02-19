@@ -1,65 +1,282 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".UserProfile">
-    
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:padding="20dp"
-        android:background="@color/colorPrimary">
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/profile_image"
-            android:src="@drawable/profile"
-
-            android:layout_centerVertical="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-            android:id="@+id/name"
-            android:text="Azones Rent"
-            android:textSize="20sp"
-            android:textColor="@color/colorAccent"
-            android:fontFamily="@font/bangers"
-            android:layout_toRightOf="@id/profile_image"
-            android:layout_centerVertical="true"
-            android:includeFontPadding="false"
-            android:layout_marginLeft="10dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="WeAreYou"
-            android:textSize="14sp"
-            android:textColor="@color/colorPrimaryDark"
-            android:includeFontPadding="false"
-            android:fontFamily="@font/bangers"
-            android:layout_toRightOf="@id/profile_image"
-            android:layout_below="@id/name"
-            android:layout_marginLeft="10dp"/>
-
-
-    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="?colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:background="@color/colorAccent"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerVertical="true"
+
+                android:src="@drawable/profile" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/profile_image"
+                android:fontFamily="@font/bangers"
+                android:includeFontPadding="false"
+                android:text="Azones Rent"
+                android:textColor="@color/design_default_color_primary_dark"
+                android:textSize="32sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/profile_image"
+                android:fontFamily="@font/bangers"
+                android:includeFontPadding="false"
+                android:text="WeAreYou"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp" />
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-50dp"
+            android:padding="20dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="88dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/colorAccent"
+                app:cardElevation="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/land" />
+
+                    <TextView
+                        android:id="@+id/Landlord"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/rouge_script"
+                        android:includeFontPadding="false"
+                        android:text="LandLord"
+                        android:textSize="20sp" />
+
+
+                    <TextView
+                        android:id="@+id/House"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/Landlord"
+                        android:layout_centerHorizontal="true"
+                        android:includeFontPadding="false"
+                        android:text="HouseNo"
+                        android:textSize="20sp" />
+
+                </RelativeLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="88dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/colorAccent"
+                app:cardElevation="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="5dp">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/house" />
+
+                    <TextView
+                        android:id="@+id/Myhouse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/rouge_script"
+                        android:includeFontPadding="false"
+                        android:text="My House"
+                        android:textSize="20sp" />
+
+
+                    <TextView
+                        android:id="@+id/Houseno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/Myhouse"
+                        android:layout_centerHorizontal="true"
+                        android:includeFontPadding="false"
+                        android:text="HouseNo"
+                        android:textSize="20sp" />
+
+                </RelativeLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            app:cardCornerRadius="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:hint="Full Name">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/user"
+                        android:drawablePadding="10dp"
+                        android:text="Onesmus" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginBottom="10dp"
+                    android:hint="Email">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/email"
+                        android:drawablePadding="10dp"
+                        android:text="admin@gmail.com" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="PhoneNo">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/phone"
+                        android:drawablePadding="10dp"
+                        android:text="0712345678" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginBottom="10dp"
+                    android:hint="Password">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/password"
+                        android:drawablePadding="10dp"
+                        android:text="abcd1234" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
 
 
         </com.google.android.material.card.MaterialCardView>
 
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:padding="20dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
+
+            <Button
+                android:id="@+id/Re_signup"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="0dp"
+                android:backgroundTint="#FF9800"
+                android:fontFamily="@font/bungee_inline"
+                android:text="UPDATE"
+                android:textColor="@color/design_default_color_primary_dark"
+                android:textSize="20sp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+
     </LinearLayout>
 
-</LinearLayout>
+
+</ScrollView>

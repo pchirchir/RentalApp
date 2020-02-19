@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/colorPrimary"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,21 +19,21 @@
             android:id="@+id/iimage"
             android:layout_width="200dp"
             android:layout_height="78dp"
-            android:transitionName="logo_image"
             android:layout_marginTop="8dp"
             android:scaleType="centerCrop"
+            android:transitionName="logo_image"
             app:srcCompat="@mipmap/logo" />
 
         <TextView
+            android:id="@+id/welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="20dp"
             android:text="!!WELCOME!!"
-            android:textSize="20sp"
-            android:id="@+id/welcome"
             android:textColor="#FF9800"
-            android:transitionName="logo_name"
+            android:textSize="20sp"
             android:textStyle="italic"
-            android:paddingTop="20dp"/>
+            android:transitionName="logo_name" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -49,18 +49,19 @@
                 android:padding="12dp">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/phone"
+                    android:id="@+id/email"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:transitionName="full"
-                    android:hint="Phono.No">
+                    android:hint="@string/email_hint"
+                    android:transitionName="full">
 
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/email_txt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="phone" />
+                        android:inputType="textEmailAddress" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,6 +77,7 @@
                     app:passwordToggleEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/password_txt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword" />
@@ -112,34 +114,32 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:elevation="0dp"
             android:gravity="center"
-            android:text="..OR.."
             android:paddingTop="12dp"
+            android:text="..OR.."
             android:textColor="#fff"
             android:textSize="20sp"
-            android:elevation="0dp"
-            android:textStyle="italic"
-            />
+            android:textStyle="italic" />
 
         <com.google.android.gms.common.SignInButton
+            android:id="@+id/Google"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="Signin"
             android:paddingTop="10dp"
-            android:id="@+id/Google"
-            app:cardCornerRadius="16dp"
-            />
+            app:cardCornerRadius="16dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/rouge_script"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/rouge_script"
             android:text="By continuing, you agree to RentalApp's Terms of Service and Privacy Policy."
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
             android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold" />
-
 
 
         <com.google.android.material.card.MaterialCardView
@@ -150,19 +150,19 @@
             app:cardCornerRadius="8dp">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/join"
-            android:layout_marginTop="2dp"
-            android:backgroundTint="#fff"
-            android:elevation="0dp"
-            android:textSize="16sp"
-            android:transitionName="but"
-            android:onClick="Signup"
-            android:text="Not a member? Join Us Today!!"
-            android:textColor="?colorPrimaryDark" />
+            <TextView
+                android:id="@+id/join"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp"
+                android:backgroundTint="#fff"
+                android:elevation="0dp"
+                android:onClick="Signup"
+                android:text="Not a member? Join Us Today!!"
+                android:textColor="?colorPrimaryDark"
+                android:textSize="16sp"
+                android:transitionName="but" />
         </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>

@@ -4,17 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Signup extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity {
+    private static final String TAG = "SignupActivity";
 
     //Variables
     TextInputLayout regname, regemail, regphone, regpassword;
@@ -23,6 +24,7 @@ public class Signup extends AppCompatActivity {
 
     FirebaseDatabase rootNode;
     DatabaseReference reference;
+    FirebaseAuth mAuth;
 
 
     @Override
@@ -32,6 +34,7 @@ public class Signup extends AppCompatActivity {
 
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("People");
+        mAuth = FirebaseAuth.getInstance();
 
         regname = findViewById(R.id.Re_name);
         regemail = findViewById(R.id.Reg_email);
@@ -109,23 +112,43 @@ public class Signup extends AppCompatActivity {
     }
 
     public void logg(View view) {
-        Intent intent = new Intent(Signup.this, LoginActivity.class);
+        Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
         startActivity(intent);
     }
 
 
     //save data to firebase
     public void Signup(View view) {
-        String gender = "";
 
         if (!validateName() | !validateEmail() | !validatePhone() | !validatePhone() | !validatePssword())
             return;
 
-        //Get all the values
-        String name = regname.getEditText().getText().toString();
-        String email = regemail.getEditText().getText().toString();
-        String phoneNo = regphone.getEditText().getText().toString();
+
         String pass = regpassword.getEditText().getText().toString();
+        String email = regemail.getEditText().getText().toString();
+
+
+        mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(
+                task -> {
+                    if (task.isSuccessful()) {
+                        saveBasicUserData();
+
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    } else {
+                        Log.e(TAG, "Signup: createUserWithEmailAndPassword", task.getException());
+                    }
+                }
+        );
+
+    }
+
+    private void saveBasicUserData() {
+        String name = regname.getEditText().getText().toString();
+        String phoneNo = regphone.getEditText().getText().toString();
+
+        String gender = "";
+
+        //Get all the values
 
         if (male.isChecked()) {
             gender = "Male";
@@ -134,12 +157,11 @@ public class Signup extends AppCompatActivity {
             }
         }
 
-        UserHelperClass userHelperClass = new UserHelperClass(name, email, phoneNo, pass, gender);
+        User user = new User(name, phoneNo, gender);
 
-        reference.child(name).setValue(userHelperClass);
+        reference.push().setValue(user);
+
 
         Toast.makeText(this, "Data saved successfully", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-
     }
 }

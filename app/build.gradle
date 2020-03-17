@@ -43,5 +43,6 @@ dependencies {
 
     //Material design dependency
     implementation 'com.google.android.material:material:1.1.0'
+
 }
 apply plugin: 'com.google.gms.google-services'

@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -85,15 +86,24 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <Button
-                    android:layout_width="200dp"
+                <TextView
+                    android:id="@+id/forgot_password_tv"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="end"
                     android:layout_marginTop="8dp"
                     android:backgroundTint="#fff"
                     android:elevation="0dp"
                     android:text="Forgot Password?"
                     android:textColor="?colorPrimaryDark" />
+
+
+                <ProgressBar
+                    android:id="@+id/login_progress_bar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content" />
 
                 <Button
                     android:layout_width="match_parent"
@@ -123,12 +133,10 @@
             android:textStyle="italic" />
 
         <com.google.android.gms.common.SignInButton
-            android:id="@+id/Google"
+            android:id="@+id/google_sign_in_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="Signin"
-            android:paddingTop="10dp"
-            app:cardCornerRadius="16dp" />
+            android:paddingTop="8dp"/>
 
         <TextView
             android:layout_width="wrap_content"

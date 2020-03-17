@@ -3,11 +3,14 @@ package com.shadow.rentalapp;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
+import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +21,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -26,22 +30,20 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = "LoginActivity";
 
-    ImageView image;
+    private ImageView image;
+    private ProgressBar loginProgressBar;
     TextView tex1, text2;
     TextInputLayout email, passwordd;
     TextInputEditText emailTxt, passwordTxt;
-    FirebaseAuth fAuth;
-
-    FirebaseDatabase rootNode;
-    DatabaseReference reference;
+    private FirebaseAuth fAuth;
 
     static final int GOOGLE_SIGN = 123;
-    GoogleSignInClient mGoogleSignInClient;
+
+    private GoogleSignInClient mGoogleSignInClient;
 
 
     @Override
@@ -51,69 +53,80 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
 
+        //Initialize fire-base instances
+        fAuth = FirebaseAuth.getInstance();
+
+        //Register views
         image = findViewById(R.id.iimage);
         tex1 = findViewById(R.id.welcome);
         text2 = findViewById(R.id.join);
         email = findViewById(R.id.email);
         passwordd = findViewById(R.id.password);
-        fAuth = FirebaseAuth.getInstance();
 
         emailTxt = findViewById(R.id.email_txt);
         passwordTxt = findViewById(R.id.password_txt);
 
-        rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("People");
+        loginProgressBar = findViewById(R.id.login_progress_bar);
 
+        SignInButton googleSignInBtn = findViewById(R.id.google_sign_in_btn);
+
+
+        //Sign in with google account
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions
-                .Builder()
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.CLIENT_ID))
                 .requestEmail()
                 .build();
+
         mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
-        if (fAuth.getCurrentUser() != null) {
-            FirebaseUser user = fAuth.getCurrentUser();
-        }
-
+        googleSignInBtn.setOnClickListener(v -> googleSignIn());
 
     }
 
 
-    private Boolean validatePhone() {
-        String val = emailTxt.getText().toString();
+    private boolean validateEmail(String email) {
 
-        if (val.isEmpty()) {
-            email.setError("Field cannot be empty");
+        if (TextUtils.isEmpty(email)) {
+            emailTxt.setError("Email is required");
+            emailTxt.requestFocus();
             return false;
-        } else {
-            email.setError(null);
-            email.setEnabled(false);
-            return true;
         }
 
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailTxt.setError("Invalid email format");
+            emailTxt.requestFocus();
+            return false;
+        }
+
+        return true;
     }
 
-    private Boolean validatePassword() {
+    private boolean validatePassword(String password) {
 
-        String val = passwordTxt.getText().toString();
-
-        if (val.isEmpty()) {
-            passwordd.setError("Field cannot be empty");
+        if (TextUtils.isEmpty(password)) {
+            passwordTxt.setError("Field cannot be empty");
+            passwordTxt.requestFocus();
             return false;
-        } else {
-            passwordd.setError(null);
-            passwordd.setEnabled(false);
-            return true;
         }
 
+        if (password.length() < 6) {
+            passwordTxt.setError("At least 6 chars required");
+            passwordTxt.requestFocus();
+            return false;
+
+        }
+
+        return true;
     }
 
 
     public void Signup(View view) {
-        Intent intent = new Intent(LoginActivity.this, UserProfile.class);
 
+        Intent intent = new Intent(this, SignupActivity.class);
 
         Pair[] pairs = new Pair[5];
+
         pairs[0] = new Pair<View, String>(image, "logo_image");
         pairs[1] = new Pair<View, String>(tex1, "logo_name");
         pairs[2] = new Pair<View, String>(text2, "but");
@@ -125,38 +138,40 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(View view) {
-        //Validate Login Info
-        if (!validatePhone() | !validatePassword())
-            return;
 
-        isUser();
+        String email = String.valueOf(emailTxt.getText());
+        String password = String.valueOf(passwordTxt.getText());
+
+        //Validate Login Info
+        if (!validateEmail(email) || !validatePassword(password)) return;
+
+        login(email, password);
 
     }
 
 
-    private void isUser() {
-        final String email = emailTxt.getText().toString().trim();
-        final String password = passwordTxt.getText().toString().trim();
+    private void login(String email, String password) {
 
-        //authenticate user
+        //Authenticate user
+        loginProgressBar.setVisibility(View.VISIBLE);
         fAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(LoginActivity.this, task -> {
-
-                    if (!task.isSuccessful()) {
-                        Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
-                    } else {
-
+                .addOnCompleteListener(this, task -> {
+                    loginProgressBar.setVisibility(View.GONE);
+                    if (task.isSuccessful()) {
                         sendHome();
-
+                    } else {
+                        Toast.makeText(this, getString(R.string.auth_failed), Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "login: authentication: ", task.getException());
                     }
                 });
 
     }
 
-    public void Signin(View view) {
+    public void googleSignIn() {
+
+        loginProgressBar.setVisibility(View.VISIBLE);
 
         Intent signIntent = mGoogleSignInClient.getSignInIntent();
-
         startActivityForResult(signIntent, GOOGLE_SIGN);
 
     }
@@ -164,15 +179,20 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == GOOGLE_SIGN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn
-                    .getSignedInAccountFromIntent(data);
+
+            loginProgressBar.setVisibility(View.GONE);
+
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                if (account != null) firebaseAuthWithGoogle(account);
+
+                firebaseAuthWithGoogle(account);
 
             } catch (ApiException e) {
+                Log.e(TAG, "onActivityResult: Google Sign In: ", e);
                 e.printStackTrace();
             }
         }
@@ -181,21 +201,19 @@ public class LoginActivity extends AppCompatActivity {
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
         Log.d("TAG", "firebaseAuthWithGoogle:" + account.getId());
-        AuthCredential credential = GoogleAuthProvider
-                .getCredential(account.getIdToken(), null);
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+
         fAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        Log.d("TAG", "Signin Successfully");
-                        FirebaseUser user = fAuth.getCurrentUser();
-
-                        if (user != null) {
-                            sendHome();
-                        }
+                        Log.d("TAG", "Sign In Successfully");
+                        sendHome();
 
                     } else {
-                        Log.w("TAG", "Signin Failure", task.getException());
-                        Toast.makeText(this, "SignIn Failed!!", Toast.LENGTH_SHORT).show();
+                        Log.e("TAG", getString(R.string.auth_failed), task.getException());
+                        assert task.getException() != null;
+                        Toast.makeText(this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -212,7 +230,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void sendHome() {
-        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }

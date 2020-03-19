@@ -3,31 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/profile"
-        android:title="Profile"
-        android:icon="@drawable/profile"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/notification"
+        android:id="@+id/notifications"
         android:icon="@drawable/notify"
-        android:title="share"
-        app:showAsAction="always" />
+        android:title="@string/notifications_text"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/share"
         android:icon="@drawable/share"
-        android:title="share"
+        android:title="@string/share_text"
         app:showAsAction="always" />
-
 
     <item
         android:id="@+id/settings"
-        android:title="Settings"
+        android:title="@string/settings_text"
         app:showAsAction="never" />
     <item
         android:id="@+id/logout"
-        android:title="LogOut"
+        android:title="@string/log_out_text"
         app:showAsAction="never" />
 
 </menu>

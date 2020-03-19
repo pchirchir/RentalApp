@@ -4,48 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context=".SplashActivity">
-
-
-
+    tools:context=".ui.SplashActivity">
 
     <ImageView
-        android:id="@+id/image_iv"
+        android:id="@+id/logo_image_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/logo"
-        app:srcCompat="@mipmap/logo"
-        android:transitionName="logo_image"
-        android:layout_marginTop="142dp"
         android:layout_gravity="center"
-        />
+        android:layout_marginTop="144dp"
+        android:contentDescription="@string/logo"
+        android:transitionName="logo_image"
+        app:srcCompat="@mipmap/logo" />
 
     <TextView
-        android:id="@+id/name_tv"
+        android:id="@+id/welcome_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="120dp"
         android:fontFamily="@font/bangers"
-        android:text="AZONES RENT"
-        android:transitionName="logo_name"
+        android:text="@string/azones_rental_text"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-        android:textColor="#FF9800"
-        android:textSize="50sp"
-
-        android:textStyle="bold" />
+        android:textColor="?colorAccent"
+        android:textSize="44sp"
+        android:textStyle="bold"
+        android:transitionName="logo_name" />
 
     <TextView
         android:id="@+id/slogan_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="We Are You"
-        android:fontFamily="@font/bangers"
         android:layout_gravity="center"
-        android:paddingTop="4dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/bangers"
+        android:text="@string/slogan_text"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="italic" />
+
 </LinearLayout>

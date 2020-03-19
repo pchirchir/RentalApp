@@ -4,9 +4,33 @@
     <string name="CLIENT_SECRET">XD4DDcIV1XzIz0bEO1ECz-2z</string>
     <string name="welcome_text">Welcome!!!</string>
     <string name="logo">Logo</string>
-
     <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
-
     <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
     <string name="email_hint">Email</string>
+    <string name="password_text">Password</string>
+    <string name="forgot_password_quiz">Forgot Password?</string>
+    <string name="login_text">Login</string>
+    <string name="or_text">..OR..</string>
+    <string name="policy_agreement_text">By continuing, you agree to RentalApp\'s Terms of Service and Privacy Policy.</string>
+    <string name="membership_quiz">Not a member? CLick to join us</string>
+    <string name="welcome_explanation">!!WELCOME!!</string>
+    <string name="app_logo_text">App Logo</string>
+    <string name="azones_rental_text">AZONES RENTAL</string>
+    <string name="slogan_text">We Are You</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="messages_text">Messages</string>
+    <string name="home_text">Home</string>
+    <string name="notifications_text">Notifications</string>
+    <string name="profile_text">Profile</string>
+    <string name="edit_text">Edit</string>
+    <string name="payments_text">Payments</string>
+    <string name="avatar_image_text">Avatar Image</string>
+    <string name="username_text">Username</string>
+    <string name="full_name_hint">Full Name</string>
+    <string name="sign_up_text">Sign Up</string>
+    <string name="have_account_prompt">Already Have an Account? Login..</string>
+    <string name="password_hint">Password</string>
+    <string name="share_text">Share</string>
+    <string name="log_out_text">Log Out</string>
+    <string name="settings_text">Settings</string>
 </resources>

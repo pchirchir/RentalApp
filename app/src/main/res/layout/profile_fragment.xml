@@ -4,23 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserProfile">
+    tools:context=".ui.fragments.profiles.ProfileFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
-
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="?colorPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -33,7 +22,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_centerVertical="true"
-
+                android:contentDescription="@string/avatar_image_text"
                 android:src="@drawable/profile" />
 
             <TextView
@@ -262,14 +251,14 @@
             app:cardElevation="10dp">
 
             <Button
-                android:id="@+id/register_btn"
+                android:id="@+id/edit_profile_btn"
                 android:layout_width="260dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="0dp"
                 android:backgroundTint="#FF9800"
                 android:fontFamily="@font/bungee_inline"
-                android:text="UPDATE"
+                android:text="@string/edit_text"
                 android:textColor="@color/design_default_color_primary_dark"
                 android:textSize="20sp" />
 

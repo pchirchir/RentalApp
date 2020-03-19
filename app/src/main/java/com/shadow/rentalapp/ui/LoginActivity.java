@@ -1,4 +1,4 @@
-package com.shadow.rentalapp;
+package com.shadow.rentalapp.ui;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -30,6 +30,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.shadow.rentalapp.R;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -123,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void Signup(View view) {
 
-        Intent intent = new Intent(this, SignupActivity.class);
+        Intent intent = new Intent(this, RegisterActivity.class);
 
         Pair[] pairs = new Pair[5];
 

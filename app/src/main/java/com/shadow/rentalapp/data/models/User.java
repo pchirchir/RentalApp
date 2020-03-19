@@ -1,4 +1,4 @@
-package com.shadow.rentalapp;
+package com.shadow.rentalapp.data.models;
 
 public class User {
 

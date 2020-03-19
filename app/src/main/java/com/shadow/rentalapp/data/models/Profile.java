@@ -14,6 +14,7 @@ public class Profile implements Serializable {
     private String phone;
     private String gender;
     private String role;
+    private String avatarUrl;
 
     public Profile() {
     }
@@ -63,5 +64,13 @@ public class Profile implements Serializable {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }

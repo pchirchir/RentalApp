@@ -33,4 +33,9 @@
     <string name="share_text">Share</string>
     <string name="log_out_text">Log Out</string>
     <string name="settings_text">Settings</string>
+    <string name="phone_hint">Phone</string>
+    <string name="male_text">Male</string>
+    <string name="female_text">Female</string>
+    <string name="gender_text">Gender</string>
+    <string name="update_profile_text">Update Profile</string>
 </resources>

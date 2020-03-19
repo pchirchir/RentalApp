@@ -159,7 +159,7 @@ public class RegisterActivity extends AppCompatActivity {
         String uid = currentUser.getUid();
 
         //Save the full name to profile
-        Profile profile = new Profile(fullName, null, null, null);
+        Profile profile = new Profile(fullName, null, null, "Tenant");
         mDatabase.collection("Profiles")
                 .document(uid)
                 .set(profile)

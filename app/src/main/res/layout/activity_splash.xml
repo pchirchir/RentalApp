@@ -27,7 +27,7 @@
         android:text="@string/azones_rental_text"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
         android:textColor="?colorAccent"
-        android:textSize="44sp"
+        android:textSize="48sp"
         android:textStyle="bold"
         android:transitionName="logo_name" />
 

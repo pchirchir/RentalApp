@@ -18,38 +18,41 @@ import com.shadow.rentalapp.R;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private TextView name;
-    private ImageView image;
+    private TextView welcomeNameTv;
+    private ImageView logoImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //Animations
         Animation topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
         Animation bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
 
         //Hooks
-        image = findViewById(R.id.logo_image_iv);
-        name = findViewById(R.id.welcome_name_tv);
-        TextView slogan = findViewById(R.id.slogan_tv);
+        logoImageView = findViewById(R.id.logo_image_iv);
+        welcomeNameTv = findViewById(R.id.welcome_name_tv);
+        TextView sloganTv = findViewById(R.id.slogan_tv);
 
 
-        image.setAnimation(topAnim);
-        name.setAnimation(bottomAnim);
-        slogan.setAnimation(bottomAnim);
+        logoImageView.setAnimation(topAnim);
+        welcomeNameTv.setAnimation(bottomAnim);
+        sloganTv.setAnimation(bottomAnim);
 
         new Handler().postDelayed(() -> {
+
             Intent intent = new Intent(this, LoginActivity.class);
 
             Pair[] pairs = new Pair[2];
-            pairs[0] = new Pair<View, String>(image, "logo_image");
-            pairs[1] = new Pair<View, String>(name, "logo_name");
+            pairs[0] = new Pair<View, String>(logoImageView, "logo_image");
+            pairs[1] = new Pair<View, String>(welcomeNameTv, "logo_name");
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, pairs);
             startActivity(intent, options.toBundle());
+            finish();
+
         }, 3000);
 
 

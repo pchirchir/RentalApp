@@ -32,7 +32,7 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         //Register the necessary views
-        Button editProfileBtn = view.findViewById(R.id.edit_profile_btn);
+        Button editProfileBtn = view.findViewById(R.id.edit_profile_button);
         editProfileBtn.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.editProfileFragment));
     }
 }

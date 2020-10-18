@@ -9,12 +9,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,15 +26,11 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity";
 
     //Variables
-    TextInputLayout regname;
-    TextInputLayout regemail;
-    TextInputLayout regpassword;
-    TextInputEditText fullNameTxt, emailTxt, passwordTxt;
+    TextInputEditText nameTxt, emailTxt, passwordTxt;
     private ProgressBar registerProgressBar;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore mDatabase;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,32 +43,28 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseFirestore.getInstance();
 
-        //Register the necessary views
-        regname = findViewById(R.id.full_name_layout);
-        regemail = findViewById(R.id.email_layout);
-        regpassword = findViewById(R.id.Reg_password);
-
-        fullNameTxt = findViewById(R.id.full_name_txt);
+        nameTxt = findViewById(R.id.full_name_txt);
         emailTxt = findViewById(R.id.email_txt);
         passwordTxt = findViewById(R.id.password_txt);
-        Button registerBtn = findViewById(R.id.register_btn);
+        Button registerBtn = findViewById(R.id.register_button);
 
         registerProgressBar = findViewById(R.id.register_progress_bar);
 
+        TextView loginTextView = findViewById(R.id.login_text_view);
+        loginTextView.setOnClickListener(view -> finish());
+
         registerBtn.setOnClickListener(view -> {
             //Get user input
-            String fullName = String.valueOf(fullNameTxt.getText());
+            String fullName = String.valueOf(nameTxt.getText());
             String email = String.valueOf(emailTxt.getText());
             String password = String.valueOf(passwordTxt.getText());
 
             //Validate user input
-
             if (!validateName(fullName)) return;
             if (!validateEmail(email)) return;
             if (!validatePassword(password)) return;
 
             //Create the user account using using fire-base auth
-
             registerUser(fullName, email, password);
         });
 
@@ -86,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
 
                     if (task.isSuccessful()) {
-
+                        //Save username to the profile
                         saveBasicUserData(fullName);
 
                     } else {
@@ -120,8 +112,8 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean validateName(String fullName) {
 
         if (TextUtils.isEmpty(fullName)) {
-            fullNameTxt.setError("Full name is required");
-            fullNameTxt.requestFocus();
+            nameTxt.setError("Full name is required");
+            nameTxt.requestFocus();
             return false;
         }
 
@@ -147,11 +139,6 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
-    public void logg(View view) {
-        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-        startActivity(intent);
-    }
-
     private void saveBasicUserData(String fullName) {
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
@@ -160,6 +147,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         //Save the full name to profile
         Profile profile = new Profile(fullName, null, null, "Tenant");
+
         mDatabase.collection("Profiles")
                 .document(uid)
                 .set(profile)
@@ -173,8 +161,6 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                     sendHome();
                 });
-
-        //Redirect to home page
     }
 
     private void sendHome() {

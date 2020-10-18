@@ -1,15 +1,13 @@
 package com.shadow.rentalapp.ui;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Pair;
 import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +23,6 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,12 +30,11 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.shadow.rentalapp.R;
 
 public class LoginActivity extends AppCompatActivity {
+
     private static final String TAG = "LoginActivity";
 
-    private ImageView image;
     private ProgressBar loginProgressBar;
-    TextView tex1, text2;
-    TextInputLayout email, passwordd;
+
     TextInputEditText emailTxt, passwordTxt;
 
     private FirebaseAuth fAuth;
@@ -59,16 +55,16 @@ public class LoginActivity extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
 
         //Register views
-        image = findViewById(R.id.iimage);
-        tex1 = findViewById(R.id.welcome);
-        text2 = findViewById(R.id.join);
-        email = findViewById(R.id.email);
-        passwordd = findViewById(R.id.password);
-
         emailTxt = findViewById(R.id.email_txt);
         passwordTxt = findViewById(R.id.password_txt);
 
         loginProgressBar = findViewById(R.id.login_progress_bar);
+
+        TextView registerTextView = findViewById(R.id.register_text_view);
+        registerTextView.setOnClickListener(view -> startActivity(new Intent(this, RegisterActivity.class)));
+
+        Button loginButton = findViewById(R.id.login_button);
+        loginButton.setOnClickListener(view -> login());
 
         SignInButton googleSignInBtn = findViewById(R.id.google_sign_in_btn);
 
@@ -121,24 +117,7 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-
-    public void Signup(View view) {
-
-        Intent intent = new Intent(this, RegisterActivity.class);
-
-        Pair[] pairs = new Pair[5];
-
-        pairs[0] = new Pair<View, String>(image, "logo_image");
-        pairs[1] = new Pair<View, String>(tex1, "logo_name");
-        pairs[2] = new Pair<View, String>(text2, "but");
-        pairs[3] = new Pair<View, String>(email, "full");
-        pairs[4] = new Pair<View, String>(passwordd, "pass");
-
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this, pairs);
-        startActivity(intent, options.toBundle());
-    }
-
-    public void login(View view) {
+    public void login() {
 
         String email = String.valueOf(emailTxt.getText());
         String password = String.valueOf(passwordTxt.getText());
@@ -188,6 +167,8 @@ public class LoginActivity extends AppCompatActivity {
 
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
+
+                assert account != null;
 
                 firebaseAuthWithGoogle(account);
 

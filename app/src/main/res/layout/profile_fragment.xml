@@ -13,143 +13,16 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:background="@color/colorAccent"
-            android:padding="20dp">
+            android:layout_height="200dp"
+            android:background="?colorAccent">
 
-            <ImageView
-                android:id="@+id/profile_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_centerVertical="true"
-                android:contentDescription="@string/avatar_image_text"
-                android:src="@drawable/profile" />
-
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/profile_image"
-                android:fontFamily="@font/bangers"
-                android:includeFontPadding="false"
-                android:text="Azones Rent"
-                android:textColor="@color/design_default_color_primary_dark"
-                android:textSize="32sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/name"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/profile_image"
-                android:fontFamily="@font/bangers"
-                android:includeFontPadding="false"
-                android:text="WeAreYou"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp" />
-
-
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/prifile_image_civ"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_account_circle_white_96dp" />
         </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-50dp"
-            android:padding="20dp">
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="88dp"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                app:cardBackgroundColor="@color/colorAccent"
-                app:cardElevation="10dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/land" />
-
-                    <TextView
-                        android:id="@+id/Landlord"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:fontFamily="@font/rouge_script"
-                        android:includeFontPadding="false"
-                        android:text="LandLord"
-                        android:textSize="20sp" />
-
-
-                    <TextView
-                        android:id="@+id/House"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/Landlord"
-                        android:layout_centerHorizontal="true"
-                        android:includeFontPadding="false"
-                        android:text="HouseNo"
-                        android:textSize="20sp" />
-
-                </RelativeLayout>
-
-
-            </com.google.android.material.card.MaterialCardView>
-
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="88dp"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                app:cardBackgroundColor="@color/colorAccent"
-                app:cardElevation="10dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingBottom="5dp">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/house" />
-
-                    <TextView
-                        android:id="@+id/Myhouse"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:fontFamily="@font/rouge_script"
-                        android:includeFontPadding="false"
-                        android:text="My House"
-                        android:textSize="20sp" />
-
-
-                    <TextView
-                        android:id="@+id/Houseno"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/Myhouse"
-                        android:layout_centerHorizontal="true"
-                        android:includeFontPadding="false"
-                        android:text="HouseNo"
-                        android:textSize="20sp" />
-
-                </RelativeLayout>
-
-
-            </com.google.android.material.card.MaterialCardView>
-
-        </LinearLayout>
 
 
         <com.google.android.material.card.MaterialCardView
@@ -164,106 +37,77 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <TextView
+                    android:id="@+id/name_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:hint="Full Name">
+                    android:layout_marginTop="16dp"
+                    android:drawableStart="@drawable/user"
+                    android:drawablePadding="8dp"
+                    android:padding="8dp"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    tools:text="@tools:sample/full_names" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/user"
-                        android:drawablePadding="10dp"
-                        android:text="Onesmus" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="32dp"
+                    android:paddingEnd="32dp"
+                    android:text="@string/full_name_hint"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
 
 
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <TextView
+                    android:id="@+id/email_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:drawableStart="@drawable/email"
+                    android:drawablePadding="8dp"
+                    android:padding="8dp"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    tools:text="jdoe@gmail.com" />
 
-                    android:layout_marginBottom="10dp"
-                    android:hint="Email">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/email"
-                        android:drawablePadding="10dp"
-                        android:text="admin@gmail.com" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="32dp"
+                    android:paddingEnd="32dp"
+                    android:text="@string/email_hint"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
 
 
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <TextView
+                    android:id="@+id/phone_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:hint="PhoneNo">
+                    android:layout_marginTop="16dp"
+                    android:drawableStart="@drawable/ic_baseline_phone_24"
+                    android:drawablePadding="8dp"
+                    android:padding="8dp"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    tools:text="@tools:sample/us_phones" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/phone"
-                        android:drawablePadding="10dp"
-                        android:text="0712345678" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="32dp"
+                    android:paddingEnd="32dp"
+                    android:text="@string/phone_hint"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
 
 
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <Button
+                    android:id="@+id/edit_profile_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-                    android:layout_marginBottom="10dp"
-                    android:hint="Password">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/password"
-                        android:drawablePadding="10dp"
-                        android:text="abcd1234" />
-
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
+                    android:layout_marginTop="32dp"
+                    android:backgroundTint="?colorAccent"
+                    android:textColor="@android:color/black"
+                    android:text="@string/edit_text" />
             </LinearLayout>
 
-
         </com.google.android.material.card.MaterialCardView>
-
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:padding="20dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="10dp">
-
-            <Button
-                android:id="@+id/edit_profile_btn"
-                android:layout_width="260dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="0dp"
-                android:backgroundTint="#FF9800"
-                android:fontFamily="@font/bungee_inline"
-                android:text="@string/edit_text"
-                android:textColor="@color/design_default_color_primary_dark"
-                android:textSize="20sp" />
-
-        </com.google.android.material.card.MaterialCardView>
-
 
     </LinearLayout>
 

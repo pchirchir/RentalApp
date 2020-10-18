@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="?colorPrimary"
     android:layout_height="match_parent"
+    android:background="?colorPrimary"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -16,31 +16,10 @@
         android:padding="16dp"
         tools:context=".ui.LoginActivity">
 
-        <ImageView
-            android:id="@+id/iimage"
-            android:layout_width="200dp"
-            android:layout_height="78dp"
-            android:layout_marginTop="8dp"
-            android:contentDescription="@string/app_logo_text"
-            android:scaleType="centerCrop"
-            android:transitionName="logo_image"
-            app:srcCompat="@mipmap/logo" />
-
-        <TextView
-            android:id="@+id/welcome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/welcome_explanation"
-            android:textColor="#FF9800"
-            android:textSize="20sp"
-            android:textStyle="italic"
-            android:transitionName="logo_name" />
-
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="48dp"
             app:cardCornerRadius="8dp">
 
             <LinearLayout
@@ -51,12 +30,11 @@
                 android:padding="12dp">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/email"
+                    android:id="@+id/email_layout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/email_hint"
-                    android:transitionName="full">
+                    android:hint="@string/email_hint">
 
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -69,7 +47,7 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/password"
+                    android:id="@+id/password_layout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -94,7 +72,6 @@
                     android:layout_gravity="end"
                     android:layout_marginTop="8dp"
                     android:backgroundTint="#fff"
-                    android:elevation="0dp"
                     android:text="@string/forgot_password_quiz"
                     android:textColor="?colorPrimaryDark" />
 
@@ -107,12 +84,11 @@
                     android:visibility="gone" />
 
                 <Button
+                    android:id="@+id/login_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="16dp"
                     android:backgroundTint="?colorAccent"
-                    android:onClick="login"
                     android:text="@string/login_text"
                     android:textColor="@android:color/black" />
             </LinearLayout>
@@ -141,24 +117,20 @@
             android:fontFamily="@font/rouge_script"
             android:text="@string/policy_agreement_text"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-            android:textColor="#000000"
+            android:textColor="@android:color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/join"
+            android:id="@+id/register_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:backgroundTint="#fff"
-            android:elevation="0dp"
-            android:onClick="Signup"
             android:text="@string/membership_quiz"
             android:textColor="?colorAccent"
-            android:textSize="16sp"
-            android:transitionName="but" />
-
+            android:textSize="16sp" />
     </LinearLayout>
 
 </ScrollView>

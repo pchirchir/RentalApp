@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.shadow.rentalapp.R;
 import com.shadow.rentalapp.data.models.Profile;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -27,6 +29,8 @@ public class ProfileFragment extends Fragment {
     private CircleImageView profileImageCiv;
 
     private FirebaseUser currentUser;
+    private Button editProfileBtn;
+    private NavController navController;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,8 +54,9 @@ public class ProfileFragment extends Fragment {
         profileImageCiv = view.findViewById(R.id.profile_image_civ);
 
         //Register the necessary views
-        Button editProfileBtn = view.findViewById(R.id.edit_profile_button);
-        editProfileBtn.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.editProfileFragment));
+        editProfileBtn = view.findViewById(R.id.edit_profile_button);
+
+        navController = Navigation.findNavController(view);
     }
 
     @Override
@@ -62,9 +67,16 @@ public class ProfileFragment extends Fragment {
 
         assert currentUser != null;
 
-        viewModel.initiateProfileRetrieval(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        viewModel.initiateProfileRetrieval(currentUser.getUid());
 
-        viewModel.getProfile().observe(getViewLifecycleOwner(), profile -> updateUI(profile));
+        viewModel.getProfile().observe(getViewLifecycleOwner(), profile -> {
+            updateUI(profile);
+
+            editProfileBtn.setOnClickListener(v -> {
+                ProfileFragmentDirections.ActionEditProfile actionEditProfile = ProfileFragmentDirections.actionEditProfile(profile);
+                navController.navigate(actionEditProfile);
+            });
+        });
     }
 
     private void updateUI(Profile profile) {
@@ -74,6 +86,9 @@ public class ProfileFragment extends Fragment {
 
         if (profile.getPhone() == null) phoneTextView.setText("Not Set");
         else phoneTextView.setText(profile.getPhone());
+
+        //Show the current profile picture
+
     }
 
 

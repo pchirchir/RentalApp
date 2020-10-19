@@ -35,10 +35,12 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple subclass of Fragment
  */
 public class EditProfileFragment extends Fragment {
+
     private static final String TAG = "EditProfileFragment";
+
     private static final int SELECT_IMAGE_RC = 22;
     private CircleImageView avatarCiv;
     private Uri mAvatarImageUri = null;
@@ -49,10 +51,25 @@ public class EditProfileFragment extends Fragment {
     private FirebaseStorage mStorage;
     private FirebaseFirestore mDatabase;
 
+
+    /**
+     * Current user profile to be updated
+     */
+    private Profile profile;
+    private RadioButton maleRb;
+    private RadioButton femaleRb;
+
     public EditProfileFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        //Get the passed profile
+        profile = EditProfileFragmentArgs.fromBundle(requireArguments()).getProfile();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,8 +104,8 @@ public class EditProfileFragment extends Fragment {
         fullNameTxt = view.findViewById(R.id.full_name_txt);
         phoneTxt = view.findViewById(R.id.phone_txt);
         //RadioGroup genderRg = view.findViewById(R.id.gender_rg);
-        RadioButton maleRb = view.findViewById(R.id.male_rb);
-        RadioButton femaleRb = view.findViewById(R.id.female_rb);
+        maleRb = view.findViewById(R.id.male_rb);
+        femaleRb = view.findViewById(R.id.female_rb);
 
         Button updateProfileBtn = view.findViewById(R.id.update_profile_btn);
 
@@ -114,6 +131,22 @@ public class EditProfileFragment extends Fragment {
                 uploadImageFirst(profile);
             }
         });
+
+        assert profile != null;
+
+        updateUI();
+    }
+
+    private void updateUI() {
+        fullNameTxt.setText(profile.getFullName());
+        phoneTxt.setText(profile.getPhone());
+
+        if (profile.getGender() != null) {
+            if (profile.getGender().equalsIgnoreCase("male"))
+                maleRb.setSelected(true);
+            else if (profile.getGender().equalsIgnoreCase("female"))
+                femaleRb.setSelected(true);
+        }
     }
 
     private void uploadImageFirst(Profile profile) {

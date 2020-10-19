@@ -1,103 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragments.profiles.EditProfileFragment">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/avatar_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?colorPrimary"
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:context=".ui.fragments.profiles.EditProfileFragment">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/avatar_civ"
-            android:layout_width="128dp"
-            android:layout_height="128dp"
-            android:layout_centerHorizontal="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_account_circle_white_96dp"
-            app:civ_border_color="@android:color/white"
-            app:civ_border_width="2dp" />
+        <RelativeLayout
+            android:id="@+id/avatar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="?colorAccent"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </RelativeLayout>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatar_civ"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_centerInParent="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_account_circle_white_96dp"
+                app:civ_border_color="@android:color/white"
+                app:civ_border_width="2dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/avatar_layout">
+        </RelativeLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:hint="@string/full_name_hint">
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintTop_toBottomOf="@id/avatar_layout">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/full_name_txt"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:inputType="textPersonName" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="@string/full_name_hint">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@android:color/transparent"
-            android:hint="@string/phone_hint">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/full_name_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:inputType="textPersonName" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phone_txt"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:background="@android:color/transparent"
-                android:inputType="phone" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="@string/phone_hint">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/gender_text"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phone_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:inputType="phone" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <RadioGroup
-            android:id="@+id/gender_rg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/male_rb"
-                android:layout_width="0dp"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/male_text" />
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/gender_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-            <RadioButton
-                android:id="@+id/female_rb"
-                android:layout_width="0dp"
+            <RadioGroup
+                android:id="@+id/gender_rg"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/female_text" />
-        </RadioGroup>
+                android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/update_profile_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/update_profile_text" />
+                <RadioButton
+                    android:id="@+id/male_rb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/male_text" />
 
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <RadioButton
+                    android:id="@+id/female_rb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/female_text" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/update_profile_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="?colorAccent"
+                android:text="@string/update_profile_text" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
